@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "string_parse.h"
+#include <string.h>
 
 int main(int argc, char*argv[]){
     srand(time(NULL));
@@ -31,8 +32,15 @@ int main(int argc, char*argv[]){
             int mod = atoi((argv[1][0] == 'd') ? &argv[1][1] : argv[1]);
             printf("You rolled a %d\n", (rand()%mod)+1);
         }
-        else{
-
+        else{ // user wants to roll multiple identical dice
+            int num_dice = atoi(argv[1]), total = 0, result;
+            int mod = atoi(&argv[1][index+1]);
+            for (int i = 0; i < num_dice; i++){
+                result = (rand()%mod)+1;
+                printf("Die %d: %d\n", i, result);
+                total += result;
+            }
+            printf("Your total roll is %d\n", total);
         }
     }
 }
