@@ -27,6 +27,8 @@ int main(int argc, char*argv[]){
         case 0:
         case 1: printf("error: expected at least one argument, got none\n");
                 exit(-1);
-        case 2: roll_dice(argv[1]); 
+        case 2: int total = roll_dice(argv[1]); 
+                printf("Your total roll is %d\n", total);
+                exit(0);
     }
 }
