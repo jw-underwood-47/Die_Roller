@@ -28,7 +28,7 @@ int main(int argc, char*argv[]){
         case 1: printf("error: expected at least one argument, got none\n");
                 exit(-1);
         case 2: int total = roll_dice(argv[1]); 
-                if(char_in_string('d', argv[1])){ // rolled several dice
+                if(char_in_string('d', argv[1]) > 0){ // rolled several dice
                     printf("Your total roll is %d\n", total);
                 }
                 else{ // only one die rolled
@@ -40,7 +40,7 @@ int main(int argc, char*argv[]){
                 while (index < argc){
                     base_index = index;
                     while ((++index < argc) &&
-                        !(char_in_string('+', argv[index]) || char_in_string('-', argv[index]))){
+                        (char_in_string('+', argv[index]) || char_in_string('-', argv[index]))){
                             mod_total += get_mod(argv[index]);
                         }
                     total = roll_dice(argv[base_index]) + mod_total;

@@ -22,7 +22,7 @@
  * in "d6" or 6. Returns roll or sum of all rolls. */
 int roll_dice(char* type_and_num){
     int index;
-    if ((index = char_in_string('d', type_and_num)) == 0){ // only one die
+    if ((index = char_in_string('d', type_and_num)) == -1){ // only one die
         int mod = atoi((type_and_num[0] == 'd') ? &type_and_num[1] : type_and_num);
             int result = (rand()%mod)+1;
             return result;
