@@ -24,20 +24,19 @@ int roll_dice(char* type_and_num){
     int index;
     if ((index = char_in_string('d', type_and_num)) == -1){ // only one die
         int mod = atoi((type_and_num[0] == 'd') ? &type_and_num[1] : type_and_num);
-            int result = (rand()%mod)+1;
-            return result;
+        int result = (rand()%mod)+1;
+        return result;
+    }
+    else{ // user wants to roll multiple identical dice
+        int num_dice = atoi(type_and_num), total = 0, result;
+        int mod = atoi(&type_and_num[index+1]); // max value of die
+        for (int i = 0; i < num_dice; i++){ // roll all the dice
+            result = (rand()%mod)+1;
+            printf("Die %d: %d\n", i, result);
+            total += result;
         }
-        else{ // user wants to roll multiple identical dice
-            int num_dice = atoi(type_and_num), total = 0, result;
-            int mod = atoi(&type_and_num[index+1]); // max value of die
-            for (int i = 0; i < num_dice; i++){ // roll all the dice
-                result = (rand()%mod)+1;
-                printf("Die %d: %d\n", i, result);
-                total += result;
-            }
-            return total;
-        }
-
+        return total;
+    }
 }
 
 /* take a string corresponding to a die modifier and return an int.
@@ -46,7 +45,7 @@ int roll_dice(char* type_and_num){
 int get_mod (char* input){
     int result;
     int pos = (input[0] == '+') ? 1 : 0;
-    if (char_in_string('d', input)){
+    if (char_in_string('d', input) != -1){
         result = roll_dice(&input[1]);
     }
     else{
