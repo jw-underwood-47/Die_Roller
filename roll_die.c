@@ -40,7 +40,7 @@ int main(int argc, char*argv[]){
                 while (index < argc){
                     base_index = index;
                     while ((++index < argc) &&
-                        (char_in_string('+', argv[index]) || char_in_string('-', argv[index]))){
+                        ((char_in_string('+', argv[index]) != -1) || (char_in_string('-', argv[index]) != -1))){
                             mod_total += get_mod(argv[index]);
                         }
                     total = roll_dice(argv[base_index]) + mod_total;
