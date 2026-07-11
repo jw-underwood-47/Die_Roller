@@ -17,7 +17,7 @@
 
 #include "string_parse.h"
 
-/* take an array specifying number and size of dice in format
+/* take a string specifying number and size of dice in format
  * [num][d]size, such as 4d8.  For single dice, can just pass
  * in "d6" or 6. Returns roll or sum of all rolls. */
 int roll_dice(char* type_and_num){
@@ -38,4 +38,19 @@ int roll_dice(char* type_and_num){
             return total;
         }
 
+}
+
+/* take a string corresponding to a die modifier and return an int.
+ * string can say to roll dice to determine modifier with [num][d]size
+ * using roll_dice */
+int get_mod (char* input){
+    int result;
+    int pos = (input[0] == '+') ? 1 : 0;
+    if (char_in_string('d', input)){
+        result = roll_dice(&input[1]);
+    }
+    else{
+        result = atoi(&input[1]);
+    }
+    return (pos) ? result : -result;
 }

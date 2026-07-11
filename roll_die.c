@@ -35,5 +35,16 @@ int main(int argc, char*argv[]){
                     printf("You rolled a %d\n", total);
                 }
                 exit(0);
+        default: // multiple dice, or modifiers
+                int index = 1, mod_total = 0, base_index;
+                while (index < argc){
+                    base_index = index;
+                    while ((++index < argc) &&
+                        !(char_in_string('+', argv[index]) || char_in_string('-', argv[index]))){
+                            mod_total += get_mod(argv[index]);
+                        }
+                    total = roll_dice(argv[base_index]) + mod_total;
+                    printf("Your total roll is %d\n", total);
+                }
     }
 }
